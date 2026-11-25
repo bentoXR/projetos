@@ -45,6 +45,7 @@ jobs:
         run: |
           mkdir -p _site/front-end
           cp index.html _site/
+          node scripts/generate-projects.mjs _site
           for dir in front-end/*/; do
             name=$(basename "$dir")
             if [ "$name" != "dutx" ] && [ "$name" != "rede" ]; then

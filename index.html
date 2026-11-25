@@ -120,67 +120,55 @@
       <p>Coleção unificada de páginas e aplicações front-end hospedadas no GitHub Pages.</p>
     </header>
 
-    <main class="grid">
-      <a class="card" href="./front-end/dutx/">
-        <div>
-          <h2>dutX</h2>
-          <p>Aplicativo de produtividade e gerenciamento de tarefas (Task Tracker).</p>
-        </div>
-        <span class="tag">React · Vite · TS</span>
-      </a>
-
-      <a class="card" href="./front-end/agente-prompt/">
-        <div>
-          <h2>Agente Prompt</h2>
-          <p>Super Prompt — Gerador de prompts com inteligência artificial.</p>
-        </div>
-        <span class="tag">HTML · CSS · JS</span>
-      </a>
-
-      <a class="card" href="./front-end/curso-de-ia/">
-        <div>
-          <h2>Curso de IA</h2>
-          <p>Página de apresentação "Inteligência Artificial na Prática".</p>
-        </div>
-        <span class="tag">HTML · CSS · JS</span>
-      </a>
-
-      <a class="card" href="./front-end/gredes/">
-        <div>
-          <h2>Gredes (LIFTO)</h2>
-          <p>Home page institucional LIFTO / Gredes.</p>
-        </div>
-        <span class="tag">HTML · CSS</span>
-      </a>
-
-      <a class="card" href="./front-end/jogo-sonic/">
-        <div>
-          <h2>Jogo Sonic</h2>
-          <p>Mini jogo estilo runner direto no navegador.</p>
-        </div>
-        <span class="tag">HTML · CSS · JS</span>
-      </a>
-
-      <a class="card" href="./front-end/projeto-001/">
-        <div>
-          <h2>Projeto 001 — OneBit</h2>
-          <p>Landing page multi-páginas com clientes e contato.</p>
-        </div>
-        <span class="tag">HTML · CSS</span>
-      </a>
-
-      <a class="card" href="./front-end/projeto-002/">
-        <div>
-          <h2>Projeto 002 — Site Mercado</h2>
-          <p>Site informativo sobre mercados, alimentação e dicas.</p>
-        </div>
-        <span class="tag">HTML · CSS</span>
-      </a>
+    <main class="grid" id="projects-grid">
+      <p style="color: var(--muted);">Carregando projetos...</p>
     </main>
 
     <footer>
       <p>Código-fonte em <a href="https://github.com/bentoXR/projetos" target="_blank" rel="noopener">github.com/bentoXR/projetos</a></p>
     </footer>
   </div>
+
+  <script>
+    async function loadProjects() {
+      const grid = document.getElementById("projects-grid");
+      try {
+        const res = await fetch("./projects.json", { cache: "no-cache" });
+        if (!res.ok) throw new Error("Falha ao carregar projects.json");
+        const projects = await res.json();
+
+        if (!Array.isArray(projects) || projects.length === 0) {
+          grid.innerHTML = '<p style="color: var(--muted);">Nenhum projeto encontrado em <code>front-end/</code>.</p>';
+          return;
+        }
+
+        grid.innerHTML = "";
+        for (const project of projects) {
+          const card = document.createElement("a");
+          card.className = "card";
+          card.href = project.href;
+
+          const info = document.createElement("div");
+          const title = document.createElement("h2");
+          title.textContent = project.title;
+          const desc = document.createElement("p");
+          desc.textContent = project.description;
+          info.append(title, desc);
+
+          const tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = project.tag;
+
+          card.append(info, tag);
+          grid.appendChild(card);
+        }
+      } catch (err) {
+        console.error(err);
+        grid.innerHTML = '<p style="color: var(--muted);">Não foi possível carregar a lista de projetos.</p>';
+      }
+    }
+
+    loadProjects();
+  </script>
 </body>
 </html>

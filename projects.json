@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "agente-prompt",
+    "href": "./front-end/agente-prompt/",
+    "title": "Agente Prompt",
+    "description": "Super Prompt — Gerador de prompts com inteligência artificial.",
+    "tag": "HTML · CSS · JS"
+  },
+  {
+    "slug": "curso-de-ia",
+    "href": "./front-end/curso-de-ia/",
+    "title": "Curso de IA",
+    "description": "Página de apresentação \"Inteligência Artificial na Prática\".",
+    "tag": "HTML · CSS · JS"
+  },
+  {
+    "slug": "dutx",
+    "href": "./front-end/dutx/",
+    "title": "dutX",
+    "description": "Aplicativo de produtividade e gerenciamento de tarefas (Task Tracker).",
+    "tag": "React · Vite · TS"
+  },
+  {
+    "slug": "gredes",
+    "href": "./front-end/gredes/",
+    "title": "Gredes (LIFTO)",
+    "description": "Home page institucional LIFTO / Gredes.",
+    "tag": "HTML · CSS"
+  },
+  {
+    "slug": "jogo-sonic",
+    "href": "./front-end/jogo-sonic/",
+    "title": "Jogo Sonic",
+    "description": "Mini jogo estilo runner direto no navegador.",
+    "tag": "HTML · CSS · JS"
+  },
+  {
+    "slug": "projeto-001",
+    "href": "./front-end/projeto-001/",
+    "title": "Projeto 001 — OneBit",
+    "description": "Landing page multi-páginas com clientes e contato.",
+    "tag": "HTML · CSS"
+  },
+  {
+    "slug": "projeto-002",
+    "href": "./front-end/projeto-002/",
+    "title": "Projeto 002 — Site Mercado",
+    "description": "Site informativo sobre mercados, alimentação e dicas.",
+    "tag": "HTML · CSS"
+  },
+  {
+    "slug": "rede",
+    "href": "./front-end/rede/",
+    "title": "Rede",
+    "description": "Projeto front-end (rede).",
+    "tag": "Vite · TS"
+  }
+]
