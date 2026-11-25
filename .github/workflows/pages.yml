@@ -1,0 +1,60 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build dutx
+        working-directory: front-end/dutx
+        run: |
+          npm install
+          npm run build
+
+      - name: Assemble _site
+        run: |
+          mkdir -p _site/front-end
+          cp index.html _site/
+          for dir in front-end/*/; do
+            name=$(basename "$dir")
+            if [ "$name" != "dutx" ]; then
+              cp -r "$dir" "_site/front-end/$name"
+            fi
+          done
+          cp -r front-end/dutx/dist _site/front-end/dutx
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "_site"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

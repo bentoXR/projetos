@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projetos — bentoXR</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --surface: #131a26;
+      --border: #232d3f;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 48px 20px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .card h2 {
+      font-size: 1.125rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+
+    .card:hover h2 {
+      color: var(--accent-hover);
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(88, 166, 255, 0.12);
+      color: var(--accent);
+      width: fit-content;
+    }
+
+    footer {
+      margin-top: 48px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Projetos — bentoXR</h1>
+      <p>Coleção unificada de páginas e aplicações front-end hospedadas no GitHub Pages.</p>
+    </header>
+
+    <main class="grid">
+      <a class="card" href="./front-end/dutx/">
+        <div>
+          <h2>dutX</h2>
+          <p>Aplicativo de produtividade e gerenciamento de tarefas (Task Tracker).</p>
+        </div>
+        <span class="tag">React · Vite · TS</span>
+      </a>
+
+      <a class="card" href="./front-end/agente-prompt/">
+        <div>
+          <h2>Agente Prompt</h2>
+          <p>Super Prompt — Gerador de prompts com inteligência artificial.</p>
+        </div>
+        <span class="tag">HTML · CSS · JS</span>
+      </a>
+
+      <a class="card" href="./front-end/curso-de-ia/">
+        <div>
+          <h2>Curso de IA</h2>
+          <p>Página de apresentação "Inteligência Artificial na Prática".</p>
+        </div>
+        <span class="tag">HTML · CSS · JS</span>
+      </a>
+
+      <a class="card" href="./front-end/gredes/">
+        <div>
+          <h2>Gredes (LIFTO)</h2>
+          <p>Home page institucional LIFTO / Gredes.</p>
+        </div>
+        <span class="tag">HTML · CSS</span>
+      </a>
+
+      <a class="card" href="./front-end/jogo-sonic/">
+        <div>
+          <h2>Jogo Sonic</h2>
+          <p>Mini jogo estilo runner direto no navegador.</p>
+        </div>
+        <span class="tag">HTML · CSS · JS</span>
+      </a>
+
+      <a class="card" href="./front-end/projeto-001/">
+        <div>
+          <h2>Projeto 001 — OneBit</h2>
+          <p>Landing page multi-páginas com clientes e contato.</p>
+        </div>
+        <span class="tag">HTML · CSS</span>
+      </a>
+
+      <a class="card" href="./front-end/projeto-002/">
+        <div>
+          <h2>Projeto 002 — Site Mercado</h2>
+          <p>Site informativo sobre mercados, alimentação e dicas.</p>
+        </div>
+        <span class="tag">HTML · CSS</span>
+      </a>
+    </main>
+
+    <footer>
+      <p>Código-fonte em <a href="https://github.com/bentoXR/projetos" target="_blank" rel="noopener">github.com/bentoXR/projetos</a></p>
+    </footer>
+  </div>
+</body>
+</html>
