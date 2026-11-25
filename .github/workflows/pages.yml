@@ -35,17 +35,24 @@ jobs:
           npm install
           npm run build
 
+      - name: Build rede
+        working-directory: front-end/rede
+        run: |
+          npm ci
+          npm run build
+
       - name: Assemble _site
         run: |
           mkdir -p _site/front-end
           cp index.html _site/
           for dir in front-end/*/; do
             name=$(basename "$dir")
-            if [ "$name" != "dutx" ]; then
+            if [ "$name" != "dutx" ] && [ "$name" != "rede" ]; then
               cp -r "$dir" "_site/front-end/$name"
             fi
           done
           cp -r front-end/dutx/dist _site/front-end/dutx
+          cp -r front-end/rede/dist _site/front-end/rede
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
