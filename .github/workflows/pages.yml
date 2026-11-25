@@ -54,6 +54,10 @@ jobs:
           done
           cp -r front-end/dutx/dist _site/front-end/dutx
           cp -r front-end/rede/dist _site/front-end/rede
+          if [ -d escola ]; then
+            cp -r escola _site/escola
+            node scripts/generate-escola.mjs _site/escola
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

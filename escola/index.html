@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apresentações — Escola</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --surface: #131a26;
+      --border: #232d3f;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 48px 20px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .count-badge {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(88, 166, 255, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(88, 166, 255, 0.25);
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .controls {
+      margin-bottom: 24px;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 420px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input::placeholder {
+      color: var(--muted);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .card h2 {
+      font-size: 1.125rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+
+    .card:hover h2 {
+      color: var(--accent-hover);
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(88, 166, 255, 0.12);
+      color: var(--accent);
+      width: fit-content;
+    }
+
+    .empty {
+      color: var(--muted);
+      grid-column: 1 / -1;
+    }
+
+    footer {
+      margin-top: 48px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-link" href="../">← Voltar para Projetos</a>
+
+    <header>
+      <div class="title-row">
+        <h1>Apresentações — Escola</h1>
+        <span class="count-badge" id="count-badge">0</span>
+      </div>
+      <p>Escolha uma apresentação para abrir no navegador.</p>
+    </header>
+
+    <div class="controls">
+      <input
+        type="search"
+        id="search-input"
+        class="search-input"
+        placeholder="Buscar apresentação por título ou descrição..."
+        aria-label="Buscar apresentação"
+      />
+    </div>
+
+    <main class="grid" id="presentations-grid">
+      <p class="empty">Carregando apresentações...</p>
+    </main>
+
+    <footer>
+      <p>Código-fonte em <a href="https://github.com/bentoXR/projetos" target="_blank" rel="noopener">github.com/bentoXR/projetos</a></p>
+    </footer>
+  </div>
+
+  <script>
+    const FALLBACK_PRESENTATIONS = [
+      {
+        title: "Poríferos: as esponjas do mar",
+        description: "Apresentação escolar",
+        href: "./Por%C3%ADferos_%20as%20esponjas%20do%20mar.html",
+        tag: "Apresentação"
+      }
+    ];
+
+    let allPresentations = [];
+
+    function updateBadge(shown, total) {
+      const badge = document.getElementById("count-badge");
+      if (shown === total) {
+        badge.textContent = total === 1 ? "1 apresentação" : `${total} apresentações`;
+      } else {
+        badge.textContent = `${shown} de ${total}`;
+      }
+    }
+
+    function renderPresentations(items) {
+      const grid = document.getElementById("presentations-grid");
+      grid.innerHTML = "";
+      updateBadge(items.length, allPresentations.length);
+
+      if (items.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "empty";
+        empty.textContent = allPresentations.length === 0
+          ? "Nenhuma apresentação encontrada nesta pasta."
+          : "Nenhuma apresentação corresponde à busca.";
+        grid.appendChild(empty);
+        return;
+      }
+
+      for (const item of items) {
+        const card = document.createElement("a");
+        card.className = "card";
+        card.href = item.href;
+
+        const info = document.createElement("div");
+        const title = document.createElement("h2");
+        title.textContent = item.title;
+        const desc = document.createElement("p");
+        desc.textContent = item.description;
+        info.append(title, desc);
+
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = item.tag || "Apresentação";
+
+        card.append(info, tag);
+        grid.appendChild(card);
+      }
+    }
+
+    async function loadPresentations() {
+      try {
+        const res = await fetch("./presentations.json", { cache: "no-cache" });
+        if (!res.ok) throw new Error("Falha ao carregar presentations.json");
+        const data = await res.json();
+        allPresentations = Array.isArray(data) ? data : FALLBACK_PRESENTATIONS;
+      } catch (err) {
+        console.warn("Usando lista fallback de apresentações:", err);
+        allPresentations = FALLBACK_PRESENTATIONS;
+      }
+      renderPresentations(allPresentations);
+    }
+
+    document.getElementById("search-input").addEventListener("input", (event) => {
+      const query = event.target.value.trim().toLowerCase();
+      if (!query) {
+        renderPresentations(allPresentations);
+        return;
+      }
+      const filtered = allPresentations.filter((item) => {
+        const title = (item.title || "").toLowerCase();
+        const desc = (item.description || "").toLowerCase();
+        return title.includes(query) || desc.includes(query);
+      });
+      renderPresentations(filtered);
+    });
+
+    loadPresentations();
+  </script>
+</body>
+</html>
